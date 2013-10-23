@@ -2,7 +2,9 @@ require 'grid'
 
 describe Grid do
 
-  let(:puzzle) { '015003002000100906270068430490002017501040380003905000900081040860070025037204600' }
+  let(:puzzle) { 
+    '015003002000100906270068430490002017501040380003905000900081040860070025037204600' 
+  }
   let(:grid) { Grid.new puzzle }
   
   it 'is of class Grid' do
@@ -53,8 +55,43 @@ describe Grid do
     expect(grid.column(1).count).to eq 9
   end
 
-  it 'the row is made up of cells' do
-    expect(grid.column(1).first.class).to be Cell
+  it 'the column is made up of cells' do
+    expect(grid.column(1).first).to be_a_kind_of Cell
+  end
+
+  it 'can return a box' do
+    grid.box_rows 1
+    expect(grid.box).to be_a_kind_of Array
+  end
+
+  it 'the box is made of 9 items' do
+    grid.box_rows 1
+    expect(grid.box.count).to eq 9
+  end
+
+  it 'selects rows for each box' do
+    expect(grid.box_rows(1)).to be_a_kind_of Array
+  end
+
+  it 'selects 3 adjacent rows for each box' do
+    expect(grid.box_rows(5).count).to eq 3
+  end
+
+  it 'selects columns for each box' do
+    array = grid.box_rows(1)
+    expect(grid.box_columns(array, 1)).to be_a_kind_of Array
+  end
+
+  it 'the box is made up of cells' do
+    grid.box_rows 7
+    expect(grid.box.first).to be_a_kind_of Cell
+  end
+
+  it 'can select the third box' do
+    grid.box_rows 3
+    expect(grid.check_box(3)).to be_a_kind_of Array
+    expect(grid.check_box(3).count).to eq 9
+    expect(grid.check_box(3).first).to be_a_kind_of Cell
   end
 
 end
