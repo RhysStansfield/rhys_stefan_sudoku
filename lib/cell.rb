@@ -9,7 +9,7 @@ class Cell
      if @value == 0
       @candidates = (1..9).to_a
     else
-      @candidates = nil
+      @candidates = []
     end
   end   
 

@@ -25,9 +25,9 @@ describe Cell do
     expect(cell.candidates.count).to be 9
   end
 
-  it 'filled cell does not have an array' do
+  it 'filled cell has an empty array' do
     cell = Cell.new 4
-    expect(cell.candidates).to be nil
+    expect(cell.candidates).to eq []
   end
 
   it 'can tell when candidates has 5 values' do
