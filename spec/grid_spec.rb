@@ -5,6 +5,7 @@ describe Grid do
   let(:puzzle) { 
     '015003002000100906270068430490002017501040380003905000900081040860070025037204600' 
   }
+
   let(:grid) { Grid.new puzzle }
   
   it 'is of class Grid' do
@@ -47,6 +48,14 @@ describe Grid do
     expect(grid.row(1).first).to be_a_kind_of Cell
   end
 
+  it 'can return the values of the first row' do
+    expect(grid.row_values(1)).to eq [0, 1, 5, 0, 0, 3, 0, 0, 2]
+  end
+
+  it 'can return the values of the fifth row' do
+    expect(grid.row_values(5)).to eq [5, 0, 1, 0, 4, 0, 3, 8, 0]
+  end
+
   it 'can return a column' do
     expect(grid.column(1)).to be_a_kind_of Array
   end
@@ -57,6 +66,14 @@ describe Grid do
 
   it 'the column is made up of cells' do
     expect(grid.column(1).first).to be_a_kind_of Cell
+  end
+
+  it 'can return the values of the first column' do
+    expect(grid.column_values(1)).to eq [0, 0, 2, 4, 5, 0, 9, 8, 0]
+  end
+
+  it 'can return the values of the third column' do
+    expect(grid.column_values(3)).to eq [5, 0, 0, 0, 1, 3, 0, 0, 7]
   end
 
   it 'can return a box' do
@@ -92,6 +109,40 @@ describe Grid do
     expect(grid.check_box(3)).to be_a_kind_of Array
     expect(grid.check_box(3).count).to eq 9
     expect(grid.check_box(3).first).to be_a_kind_of Cell
+  end
+
+  it 'can return the values of the first box' do
+    grid.box_rows 1
+    expect(grid.box_values(1)).to eq [0, 1, 5, 0, 0, 0, 2, 7, 0]
+  end
+
+  it 'can return the values of the 9th box' do
+    grid.box_rows 9
+    expect(grid.box_values(9)).to eq [0, 4, 0, 0, 2, 5, 6, 0, 0]
+  end
+
+  it 'can return all of its columns' do
+    expect(grid.columns).to be_a_kind_of Array
+  end
+
+  it 'has 9 columns' do
+    expect(grid.columns.count).to eq 9
+  end
+
+  it 'has columns made of cells' do
+    expect(grid.columns.first.first).to be_a_kind_of Cell
+  end
+
+  it 'can return all of its boxes' do
+    expect(grid.boxes).to be_a_kind_of Array
+  end
+
+  it 'has 9 boxes' do
+    expect(grid.boxes.count).to eq 9
+  end
+
+  it 'has boxes made of cells' do
+    expect(grid.boxes.first.first).to be_a_kind_of Cell
   end
 
 end

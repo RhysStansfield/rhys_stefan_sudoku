@@ -27,18 +27,38 @@ class Grid
   end
 
   def row number
+    number -= 1
     @puzzle[number]
   end
 
+  def row_values number
+    row(number).map { |cell| cell.value }
+  end
+
   def column number
+    number -= 1
     column_array = []
     @puzzle.each { |array| column_array << array[number] }
     column_array
   end
 
+  def column_values number
+    column(number).map { |cell| cell.value }
+  end
+
+  def columns
+    columns_array = []
+    (1..9).each { |num| columns_array << column(num) }
+    columns_array
+  end
+
   def check_box number
     box_rows number
     @box
+  end
+
+  def box_values number
+    check_box(number).map { |cell| cell.value }
   end
 
   def box_rows number
@@ -68,6 +88,12 @@ class Grid
   def box_sorter rows, number
     box_array = rows[0][number, 3] + rows[1][number, 3] + rows[2][number, 3]
     @box = box_array
+  end
+
+  def boxes
+    boxes_array = []
+    (1..9).each { |num| boxes_array << check_box(num) }
+    boxes_array
   end
 
 end
